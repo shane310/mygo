@@ -1,4 +1,4 @@
-module github.com/gogf/gf-demos
+module mygo
 
 go 1.11
 
