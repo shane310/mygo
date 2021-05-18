@@ -1,10 +1,8 @@
-FROM golang:latest
-LABEL maintainer="362791939@qq.com"
+FROM alpine:latest
 
 ENV WORKDIR /var/www/skill-score
+WORKDIR ${WORKDIR}
 
-RUN go env -w GOPROXY=https://goproxy.cn
-RUN go get -u -v github.com/gogf/gf
 
-RUN wget https://goframe.org/cli/linux_amd64/gf && chmod +x gf && ./gf install
-EXPOSE 8080
+
+# ENTRYPOINT ["./timelocation"]
