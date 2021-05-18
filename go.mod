@@ -1,4 +1,4 @@
-module mygo
+module github.com/shane310/mygo
 
 go 1.11
 

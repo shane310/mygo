@@ -1,9 +1,9 @@
 package main
 
 import (
-	_ "github.com/gogf/gf-demos/boot"
-	_ "github.com/gogf/gf-demos/router"
 	"github.com/gogf/gf/frame/g"
+	_ "github.com/shane310/mygo/boot"
+	_ "github.com/shane310/mygo/router"
 )
 
 // @title       技能大賽評分系統
