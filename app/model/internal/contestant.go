@@ -5,17 +5,20 @@
 package internal
 
 import (
-    "github.com/gogf/gf/os/gtime"
+	"github.com/gogf/gf/os/gtime"
+	"github.com/gogf/gf/util/gmeta"
 )
 
 // Contestant is the golang structure for table contestant.
 type Contestant struct {
-    Id        int         `orm:"id,primary" json:"id"`        //   
-    Tid       int         `orm:"tid"        json:"tid"`       //   
-    Name      string      `orm:"name"       json:"name"`      //   
-    Vurl      string      `orm:"vurl"       json:"vurl"`      //   
-    Sid       int         `orm:"sid"        json:"sid"`       //   
-    Score     float64     `orm:"score"      json:"score"`     //   
-    CreatedAt *gtime.Time `orm:"created_at" json:"createdAt"` //   
-    UpdatedAt *gtime.Time `orm:"updated_at" json:"updatedAt"` //   
+	gmeta.Meta `orm:"table:contestant"`
+	Id         int         `orm:"id,primary" json:"id"`        //
+	Gid        int         `orm:"gid"        json:"gid"`       //
+	Name       string      `orm:"name"       json:"name"`      //
+	Region     string      `orm:"region"     json:"region"`    //
+	Group      string      `orm:"group"      json:"group"`     //
+	Province   string      `orm:"province"   json:"province"`  //
+	CreatedAt  *gtime.Time `orm:"created_at" json:"createdAt"` //
+	UpdatedAt  *gtime.Time `orm:"updated_at" json:"updatedAt"` //
+	UserScores []*Score    `orm:"with:contestant_id=id"`
 }

@@ -5,16 +5,21 @@
 package internal
 
 import (
-    "github.com/gogf/gf/os/gtime"
+	"github.com/gogf/gf/os/gtime"
+	"github.com/gogf/gf/util/gmeta"
 )
 
 // Score is the golang structure for table score.
 type Score struct {
-    Uid       int         `orm:"uid,primary" json:"uid"`       //   
-    Cid       int         `orm:"cid"         json:"cid"`       //   
-    Rules     string      `orm:"rules"       json:"rules"`     //   
-    Score     float64     `orm:"score"       json:"score"`     //   
-    Comments  string      `orm:"comments"    json:"comments"`  //   
-    CreatedAt *gtime.Time `orm:"created_at"  json:"createdAt"` //   
-    UpdatedAt *gtime.Time `orm:"updated_at"  json:"updatedAt"` //   
+	gmeta.Meta   `orm:"table:score"`
+	Id           int         `orm:"id,primary"    json:"id"`           //
+	ContestantId int         `orm:"contestant_id" json:"contestantId"` //
+	SubjectId    int         `orm:"subject_id"    json:"subjectId"`    //
+	UserId       int         `orm:"user_id"       json:"userId"`       //
+	Vurl         string      `orm:"vurl"          json:"vurl"`         //
+	Result       string      `orm:"result"        json:"result"`       //
+	Score        float64     `orm:"score"         json:"score"`        //
+	Comments     string      `orm:"comments"      json:"comments"`     //
+	CreatedAt    *gtime.Time `orm:"created_at"    json:"createdAt"`    //
+	UpdatedAt    *gtime.Time `orm:"updated_at"    json:"updatedAt"`    //
 }

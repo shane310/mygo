@@ -26,12 +26,11 @@ type RuleDao struct {
 
 // RuleColumns defines and stores column names for table rule.
 type ruleColumns struct {
-	Id         string //   
-    Title      string //   
-    Rules      string //   
-    Desc       string //   
-    Imgurl     string //   
-    CreatedAt  string //   
+	Id         string //             
+    Title      string //             
+    Score      string //             
+    SubjectId  string // subject id  
+    CreatedAt  string //             
     UpdatedAt  string //
 }
 
@@ -44,9 +43,8 @@ var (
 		Columns: ruleColumns{
 			Id:        "id",          
             Title:     "title",       
-            Rules:     "rules",       
-            Desc:      "desc",        
-            Imgurl:    "imgurl",      
+            Score:     "score",       
+            SubjectId: "subject_id",  
             CreatedAt: "created_at",  
             UpdatedAt: "updated_at",
 		},

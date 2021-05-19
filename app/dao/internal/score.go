@@ -26,13 +26,16 @@ type ScoreDao struct {
 
 // ScoreColumns defines and stores column names for table score.
 type scoreColumns struct {
-	Uid        string //   
-    Cid        string //   
-    Rules      string //   
-    Score      string //   
-    Comments   string //   
-    CreatedAt  string //   
-    UpdatedAt  string //
+	Id            string //   
+    ContestantId  string //   
+    SubjectId     string //   
+    UserId        string //   
+    Vurl          string //   
+    Result        string //   
+    Score         string //   
+    Comments      string //   
+    CreatedAt     string //   
+    UpdatedAt     string //
 }
 
 var (
@@ -42,13 +45,16 @@ var (
 		DB:    g.DB("default"),
 		Table: "score",
 		Columns: scoreColumns{
-			Uid:       "uid",         
-            Cid:       "cid",         
-            Rules:     "rules",       
-            Score:     "score",       
-            Comments:  "comments",    
-            CreatedAt: "created_at",  
-            UpdatedAt: "updated_at",
+			Id:           "id",             
+            ContestantId: "contestant_id",  
+            SubjectId:    "subject_id",     
+            UserId:       "user_id",        
+            Vurl:         "vurl",           
+            Result:       "result",         
+            Score:        "score",          
+            Comments:     "comments",       
+            CreatedAt:    "created_at",     
+            UpdatedAt:    "updated_at",
 		},
 	}
 )

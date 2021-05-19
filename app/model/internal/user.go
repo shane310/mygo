@@ -11,11 +11,12 @@ import (
 // User is the golang structure for table user.
 type User struct {
     Id        int         `orm:"id,primary" json:"id"`        //               
+    Gid       int         `orm:"gid"        json:"gid"`       //               
     Name      string      `orm:"name"       json:"name"`      //               
     Password  string      `orm:"password"   json:"password"`  //               
     Desc      string      `orm:"desc"       json:"desc"`      //               
-    Tid       int         `orm:"tid"        json:"tid"`       //               
     Type      int         `orm:"type"       json:"type"`      // 1:场内2:场外  
+    Province  string      `orm:"province"   json:"province"`  //               
     Starttime *gtime.Time `orm:"starttime"  json:"starttime"` //               
     Endtime   *gtime.Time `orm:"endtime"    json:"endtime"`   //               
     CreatedAt *gtime.Time `orm:"created_at" json:"createdAt"` //               

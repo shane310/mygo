@@ -24,5 +24,6 @@ func init() {
 	})
 	s.Group("/api/", func(group *ghttp.RouterGroup) {
 		group.GET("/contestant", api.Contestant)
+		group.GET("/contestant/:id", api.Contestant.Show)
 	})
 }

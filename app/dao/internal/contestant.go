@@ -26,14 +26,14 @@ type ContestantDao struct {
 
 // ContestantColumns defines and stores column names for table contestant.
 type contestantColumns struct {
-	Id         string //   
-    Tid        string //   
-    Name       string //   
-    Vurl       string //   
-    Sid        string //   
-    Score      string //   
-    CreatedAt  string //   
-    UpdatedAt  string //
+	Id        string //
+	Gid       string //
+	Name      string //
+	Region    string //
+	Group     string //
+	Province  string //
+	CreatedAt string //
+	UpdatedAt string //
 }
 
 var (
@@ -43,14 +43,14 @@ var (
 		DB:    g.DB("default"),
 		Table: "contestant",
 		Columns: contestantColumns{
-			Id:        "id",          
-            Tid:       "tid",         
-            Name:      "name",        
-            Vurl:      "vurl",        
-            Sid:       "sid",         
-            Score:     "score",       
-            CreatedAt: "created_at",  
-            UpdatedAt: "updated_at",
+			Id:        "id",
+			Gid:       "gid",
+			Name:      "name",
+			Region:    "region",
+			Group:     "group",
+			Province:  "province",
+			CreatedAt: "created_at",
+			UpdatedAt: "updated_at",
 		},
 	}
 )

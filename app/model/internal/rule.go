@@ -10,11 +10,10 @@ import (
 
 // Rule is the golang structure for table rule.
 type Rule struct {
-    Id        int         `orm:"id,primary" json:"id"`        //   
-    Title     string      `orm:"title"      json:"title"`     //   
-    Rules     string      `orm:"rules"      json:"rules"`     //   
-    Desc      string      `orm:"desc"       json:"desc"`      //   
-    Imgurl    string      `orm:"imgurl"     json:"imgurl"`    //   
-    CreatedAt *gtime.Time `orm:"created_at" json:"createdAt"` //   
-    UpdatedAt *gtime.Time `orm:"updated_at" json:"updatedAt"` //   
+    Id        int         `orm:"id,primary" json:"id"`        //             
+    Title     string      `orm:"title"      json:"title"`     //             
+    Score     int         `orm:"score"      json:"score"`     //             
+    SubjectId int         `orm:"subject_id" json:"subjectId"` // subject id  
+    CreatedAt *gtime.Time `orm:"created_at" json:"createdAt"` //             
+    UpdatedAt *gtime.Time `orm:"updated_at" json:"updatedAt"` //             
 }
