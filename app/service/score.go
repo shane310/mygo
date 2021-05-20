@@ -32,6 +32,9 @@ func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 	if r.Get("score") != nil {
 		data.Score = r.GetFloat64("score")
 	}
+	if r.Get("comments") != nil {
+		data.Comments = r.Get("comments").(string)
+	}
 	score.Model.Save(data)
 	return data
 }
