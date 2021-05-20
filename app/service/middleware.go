@@ -44,3 +44,4 @@ func (s *middlewareService) CORS(r *ghttp.Request) {
 	r.Response.CORSDefault()
 	r.Middleware.Next()
 }
+

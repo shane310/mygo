@@ -8,6 +8,7 @@ import (
 	"github.com/gogf/gf-demos/app/dao"
 	"github.com/gogf/gf-demos/app/model"
 	"github.com/gogf/gf/crypto/gmd5"
+	"github.com/gogf/gf/frame/g"
 )
 
 // 中间件管理服务
@@ -90,4 +91,16 @@ func (s *userService) CheckNickName(nickname string) bool {
 // 获得用户信息详情
 func (s *userService) GetProfile(ctx context.Context) *model.User {
 	return Session.GetUser(ctx)
+}
+
+func (s *userService) GetUserByUsernamePassword(serviceReq *model.ServiceLoginReq) map[string]interface{} {
+	user, err := dao.User.FindOne("(name=? or gid=?) and password=?", serviceReq.Name,serviceReq.Name, serviceReq.Password)
+	if err != nil || user == nil {
+		return nil
+	}
+	res := g.Map{
+		"id":user.Id,
+		"name":user.Name,
+	}
+	return res
 }

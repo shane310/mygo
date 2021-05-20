@@ -12,3 +12,9 @@ import (
 type Score internal.Score
 
 // Fill with you ideas below.
+
+
+type DoScoreReq struct {
+	Id int
+	Result string
+}
