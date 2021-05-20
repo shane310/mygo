@@ -42,7 +42,7 @@ func (s *contestantService) Search(r *ghttp.Request) gdb.Result {
 // my contestant
 func (s *contestantService) MyContestant(r *ghttp.Request) gdb.Result {
 	// payload := r.Get("JWT_PAYLOAD")
-	userId := r.Get("id")
+	userId := r.Get("uid")
 	m := g.DB().Model("Contestant").Safe().
 		LeftJoin("score", "score.contestant_id=contestant.id").
 		Fields("score.id,name,gid,score")

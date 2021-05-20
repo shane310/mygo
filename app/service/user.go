@@ -94,13 +94,13 @@ func (s *userService) GetProfile(ctx context.Context) *model.User {
 }
 
 func (s *userService) GetUserByUsernamePassword(serviceReq *model.ServiceLoginReq) map[string]interface{} {
-	user, err := dao.User.FindOne("(name=? or gid=?) and password=?", serviceReq.Name,serviceReq.Name, serviceReq.Password)
+	user, err := dao.User.FindOne("(name=? or gid=?) and password=?", serviceReq.Name, serviceReq.Name, serviceReq.Password)
 	if err != nil || user == nil {
 		return nil
 	}
 	res := g.Map{
-		"id":user.Id,
-		"name":user.Name,
+		"uid":  user.Id,
+		"name": user.Name,
 	}
 	return res
 }

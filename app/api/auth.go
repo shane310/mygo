@@ -26,7 +26,7 @@ func init() {
 		Key:             []byte("secret key"),
 		Timeout:         time.Minute * 10080,
 		MaxRefresh:      time.Minute * 10080,
-		IdentityKey:     "id",
+		IdentityKey:     "uid",
 		TokenLookup:     "header: Authorization, query: token, cookie: jwt",
 		TokenHeadName:   "Bearer",
 		TimeFunc:        time.Now,
