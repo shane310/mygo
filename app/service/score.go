@@ -35,3 +35,9 @@ func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 	score.Model.Save(data)
 	return data
 }
+
+// score detail
+func (s *ScoreService) Show(id int) *score.Entity {
+	data, _ := score.Model.One(id)
+	return data
+}

@@ -12,14 +12,14 @@ var Score = new(scoreApi)
 
 type scoreApi struct{}
 
-// @summary 获取科目详情
-// @tags    Subject
+// @summary 获取评分详情
+// @tags    Score
 // @produce json
-// @router  /subject/:id [GET]
+// @router  /score/:id [GET]
 // @success 200 {object} response.JsonResponse "执行结果"
 func (a *scoreApi) Show(r *ghttp.Request) {
 	id := r.GetInt("id")
-	data := service.Subject.Show(id)
+	data := service.Score.Show(id)
 	response.JsonExit(r, 0, "ok", data)
 }
 

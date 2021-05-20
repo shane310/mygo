@@ -8,17 +8,44 @@ import (
 	"database/sql"
 	"github.com/gogf/gf/database/gdb"
 	"github.com/gogf/gf/os/gtime"
+	"github.com/gogf/gf/util/gmeta"
 )
 
-// Entity is the golang structure for table subject.
-type Entity struct {
-    Id        int         `orm:"id,primary" json:"id"`         //   
-    Name      string      `orm:"name"       json:"name"`       //   
-    MatchId   int         `orm:"match_id"   json:"match_id"`   //   
-    Img       string      `orm:"img"        json:"img"`        //   
-    CreatedAt *gtime.Time `orm:"created_at" json:"created_at"` //   
-    UpdatedAt *gtime.Time `orm:"updated_at" json:"updated_at"` //   
+type EntityRule struct {
+	gmeta.Meta `orm:"table:rule"`
+	Id         int         `orm:"id,primary" json:"id"`         //
+	Title      string      `orm:"title"      json:"title"`      //
+	Score      int         `orm:"score"      json:"score"`      //
+	SubjectId  int         `orm:"subject_id" json:"subject_id"` // subject id
+	CreatedAt  *gtime.Time `orm:"created_at" json:"created_at"` //
+	UpdatedAt  *gtime.Time `orm:"updated_at" json:"updated_at"` //
 }
+
+type EntitySubject struct {
+	Id        int         `orm:"id,primary" json:"id"`         //
+	Name      string      `orm:"name"       json:"name"`       //
+	MatchId   int         `orm:"match_id"   json:"match_id"`   //
+	Img       string      `orm:"img"        json:"img"`        //
+	CreatedAt *gtime.Time `orm:"created_at" json:"created_at"` //
+	UpdatedAt *gtime.Time `orm:"updated_at" json:"updated_at"` //
+}
+
+type Entity struct {
+	Subject *EntitySubject
+	Rule    []*EntityRule
+}
+
+// Entity is the golang structure for table subject.
+// type Entity struct {
+// 	gmeta.Meta `orm:"table:subject"`
+// 	Id         int         `orm:"id,primary" json:"id"`         //
+// 	Name       string      `orm:"name"       json:"name"`       //
+// 	MatchId    int         `orm:"match_id"   json:"match_id"`   //
+// 	Img        string      `orm:"img"        json:"img"`        //
+// 	CreatedAt  *gtime.Time `orm:"created_at" json:"created_at"` //
+// 	UpdatedAt  *gtime.Time `orm:"updated_at" json:"updated_at"` //
+// 	Rule       []*Rule     `orm:"with:subject_id=id"`
+// }
 
 // OmitEmpty sets OPTION_OMITEMPTY option for the model, which automatically filers
 // the data and where attributes for empty values.

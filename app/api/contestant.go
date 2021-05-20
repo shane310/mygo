@@ -35,7 +35,7 @@ func (a *contestantApi) Show(r *ghttp.Request) {
 // @summary 获取我名下的选手
 // @tags    Contestant
 // @produce json
-// @param isSored query int false "是否已打分：0 1"
+// @param isScored query int false "是否已打分：0 1"
 // @router  /contestant/my [GET]
 // @success 200 {object} response.JsonResponse "执行结果"
 func (a *contestantApi) My(r *ghttp.Request) {

@@ -34,6 +34,9 @@ func init() {
 		group.GET("/contestant/:id", api.Contestant.Show)
 		group.GET("/contestant", api.Contestant)
 		group.GET("/subject/:id", api.Subject.Show)
+		group.GET("/subject", api.Subject)
 		group.PUT("/score/:id", api.Score.Do)
+		group.GET("/score/:id", api.Score.Show)
+		group.GET("/score", api.Score)
 	})
 }
