@@ -4,6 +4,8 @@ import (
 	"strings"
 
 	"github.com/gogf/gf-demos/app/model/score"
+	"github.com/gogf/gf/database/gdb"
+	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/util/gconv"
 )
@@ -40,7 +42,13 @@ func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 }
 
 // score detail
-func (s *ScoreService) Show(id int) *score.Entity {
-	data, _ := score.Model.One(id)
+func (s *ScoreService) Show(id int) gdb.Record {
+	data, err := g.DB().Model("Contestant").Safe().
+		LeftJoin("score", "score.contestant_id=contestant.id").
+		Fields("score.id score_id,subject_id,score,gid,name").
+		One("score.id", id)
+	if err != nil {
+		return nil
+	}
 	return data
 }
