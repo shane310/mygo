@@ -18,20 +18,25 @@ var Score = ScoreService{}
 type ScoreService struct{}
 
 // contestant list
-func (s *ScoreService) Do(r *ghttp.Request) *score.Entity{
+func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 	id := r.Get("id")
 	data, err := score.Model.One(id)
 	if err != nil || data == nil {
 		return nil
 	}
-	result:=r.Get("result").(string)
-	var totalScore float64
-	for _,v := range strings.Split(result,","){
-		totalScore+=gconv.Float64(v)
+	if r.Get("result") != nil {
+		result := r.Get("result").(string)
+		var totalScore float64
+		for _, v := range strings.Split(result, ",") {
+			totalScore += gconv.Float64(v)
+		}
+		data.Result = result
+		data.Score = totalScore
 	}
-	data.Result = result
-	data.Score = totalScore
-	g.Dump(score.Model.Save(data))
+	if r.Get("score") != nil {
+		data.Score = r.GetFloat64("score")
+	}
+	score.Model.Save(data)
 	return data
 }
 
@@ -44,7 +49,7 @@ func (s *ScoreService) Show(id int) *model.Contestant {
 // contestant show
 func (s *ScoreService) MyContestant(r *ghttp.Request) gdb.Result {
 	// payload := r.Get("JWT_PAYLOAD")
-	userId :=r.Get("id")
+	userId := r.Get("id")
 	m := g.DB().Model("Contestant").Safe().LeftJoin("score", "score.contestant_id=contestant.id").Fields("name,gid,score")
 	isScored := r.Get("isScored")
 	if isScored != nil {

@@ -21,17 +21,12 @@ func init() {
 			service.Middleware.Ctx,
 			service.Middleware.CORS,
 		)
-	s.Group("/auth/", func(g *ghttp.RouterGroup) {
-		g.ALL("/login", api.Auth.LoginHandler)
-		g.ALL("/refresh_token", api.Auth.RefreshHandler)
-		g.ALL("/logout", api.Auth.LogoutHandler)
-	})
-		group.ALL("/chat", api.Chat)
-		group.ALL("/user", api.User)
-		group.Group("/", func(group *ghttp.RouterGroup) {
-			group.Middleware(service.Middleware.Auth)
-			group.ALL("/user/profile", api.User.Profile)
+		s.Group("/auth/", func(g *ghttp.RouterGroup) {
+			g.ALL("/login", api.Auth.LoginHandler)
+			g.ALL("/refresh_token", api.Auth.RefreshHandler)
+			g.ALL("/logout", api.Auth.LogoutHandler)
 		})
+		group.ALL("/user", api.User)
 	})
 	s.Group("/api/", func(group *ghttp.RouterGroup) {
 
