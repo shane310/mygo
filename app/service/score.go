@@ -17,7 +17,8 @@ type ScoreService struct{}
 
 // Do score
 func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
-	id := r.Get("id")
+	id := r.GetInt("id")
+	g.Dump(id)
 	data, err := score.Model.One(id)
 	if err != nil || data == nil {
 		return nil
@@ -37,6 +38,7 @@ func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 	if r.Get("comments") != nil {
 		data.Comments = r.Get("comments").(string)
 	}
+	data.Id = id
 	score.Model.Save(data)
 	return data
 }
