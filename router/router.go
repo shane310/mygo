@@ -17,7 +17,7 @@ func init() {
 	s := g.Server()
 	// 分组路由注册方式
 	s.Group("/auth/", func(group *ghttp.RouterGroup) {
-		group.Middleware(service.Middleware.Ctx, service.Middleware.CORS, jwtAuth)
+		group.Middleware(service.Middleware.Ctx, service.Middleware.CORS)
 		group.ALL("/login", api.Auth.LoginHandler)
 		group.ALL("/refresh_token", api.Auth.RefreshHandler)
 		group.ALL("/logout", api.Auth.LogoutHandler)
