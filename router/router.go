@@ -16,16 +16,17 @@ func jwtAuth(r *ghttp.Request) {
 func init() {
 	s := g.Server()
 	// 分组路由注册方式
+	s.Group("/auth/", func(group *ghttp.RouterGroup) {
+		group.Middleware(service.Middleware.Ctx, service.Middleware.CORS, jwtAuth)
+		group.ALL("/login", api.Auth.LoginHandler)
+		group.ALL("/refresh_token", api.Auth.RefreshHandler)
+		group.ALL("/logout", api.Auth.LogoutHandler)
+	})
 	s.Group("/", func(group *ghttp.RouterGroup) {
 		group.Middleware(
 			service.Middleware.Ctx,
 			service.Middleware.CORS,
 		)
-		s.Group("/auth/", func(g *ghttp.RouterGroup) {
-			g.ALL("/login", api.Auth.LoginHandler)
-			g.ALL("/refresh_token", api.Auth.RefreshHandler)
-			g.ALL("/logout", api.Auth.LogoutHandler)
-		})
 		group.ALL("/user", api.User)
 	})
 	s.Group("/api/", func(group *ghttp.RouterGroup) {
