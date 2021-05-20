@@ -26,10 +26,24 @@ func (s *contestantService) Show(id int) *model.Contestant {
 }
 
 // contestant show
+// func (s *contestantService) Search(r *ghttp.Request) *model.Contestant {
+// 	keyword:=r.Get("keyword")
+// 	m:=contestant.Model.
+// 	LeftJoin("score", "score.contestant_id=contestant.id").
+// 	Fields("name,gid,score,comments")
+// 	if keyword != nil{
+
+// 	}
+// 	return data
+// }
+
+// my contestant
 func (s *contestantService) MyContestant(r *ghttp.Request) gdb.Result {
 	// payload := r.Get("JWT_PAYLOAD")
-	userId :=r.Get("id")
-	m := g.DB().Model("Contestant").Safe().LeftJoin("score", "score.contestant_id=contestant.id").Fields("name,gid,score")
+	userId := r.Get("id")
+	m := g.DB().Model("Contestant").Safe().
+		LeftJoin("score", "score.contestant_id=contestant.id").
+		Fields("score.id,name,gid,score")
 	isScored := r.Get("isScored")
 	if isScored != nil {
 		switch isScored {
