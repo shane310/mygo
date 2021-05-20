@@ -42,3 +42,14 @@ func (a *contestantApi) My(r *ghttp.Request) {
 	data := service.Contestant.MyContestant(r)
 	response.JsonExit(r, 0, "ok", data)
 }
+
+// @summary 查询分数
+// @tags    Contestant
+// @produce json
+// @param keyword query string false "姓名/gid"
+// @router  /contestant/search [GET]
+// @success 200 {object} response.JsonResponse "执行结果"
+func (a *contestantApi) Search(r *ghttp.Request) {
+	data := service.Contestant.Search(r)
+	response.JsonExit(r, 0, "ok", data)
+}

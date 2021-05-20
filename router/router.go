@@ -30,11 +30,8 @@ func init() {
 		group.ALL("/user", api.User)
 	})
 	s.Group("/api/", func(group *ghttp.RouterGroup) {
-
-		group.GET("/contestant/:id", api.Contestant.Show)
-	})
-	s.Group("/api/", func(group *ghttp.RouterGroup) {
 		group.Middleware(service.Middleware.CORS, jwtAuth)
+		group.GET("/contestant/:id", api.Contestant.Show)
 		group.GET("/contestant", api.Contestant)
 		group.GET("/subject/:id", api.Subject.Show)
 		group.PUT("/score/:id", api.Score.Do)

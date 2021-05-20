@@ -3,6 +3,7 @@ package service
 import (
 	"github.com/gogf/gf-demos/app/dao"
 	"github.com/gogf/gf-demos/app/model"
+	"github.com/gogf/gf-demos/app/model/contestant"
 	"github.com/gogf/gf/database/gdb"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
@@ -26,16 +27,17 @@ func (s *contestantService) Show(id int) *model.Contestant {
 }
 
 // contestant show
-// func (s *contestantService) Search(r *ghttp.Request) *model.Contestant {
-// 	keyword:=r.Get("keyword")
-// 	m:=contestant.Model.
-// 	LeftJoin("score", "score.contestant_id=contestant.id").
-// 	Fields("name,gid,score,comments")
-// 	if keyword != nil{
-
-// 	}
-// 	return data
-// }
+func (s *contestantService) Search(r *ghttp.Request) []*contestant.Entity {
+	keyword := r.Get("keyword")
+	m := contestant.Model.
+		LeftJoin("score", "score.contestant_id=contestant.id").
+		Fields("name,gid,score,comments")
+	if keyword != nil {
+		m = m.Where("gid=? or name=?", keyword, keyword)
+	}
+	data, _ := m.All()
+	return data
+}
 
 // my contestant
 func (s *contestantService) MyContestant(r *ghttp.Request) gdb.Result {
