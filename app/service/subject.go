@@ -15,7 +15,7 @@ type subjectService struct{}
 // subject detail
 func (s *subjectService) Show(id int) subject.Entity {
 	var subject subject.Entity
-	g.DB().Table("user").Scan(&subject.Subject, "id", id)
+	g.DB().Table("subject").Scan(&subject.Subject, "id", id)
 	g.DB().Table("rule").Scan(&subject.Rule, "subject_id", subject.Subject.Id)
 	return subject
 }
