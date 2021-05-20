@@ -1,14 +1,15 @@
 package service
 
 import (
-	"database/sql"
 	"strings"
 
 	"github.com/gogf/gf-demos/app/dao"
 	"github.com/gogf/gf-demos/app/model"
+	"github.com/gogf/gf-demos/app/model/score"
 	"github.com/gogf/gf/database/gdb"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/util/gconv"
 )
 
 // 中间件管理服务
@@ -17,11 +18,20 @@ var Score = ScoreService{}
 type ScoreService struct{}
 
 // contestant list
-func (s *ScoreService) Do(r *ghttp.Request) sql.Result{
+func (s *ScoreService) Do(r *ghttp.Request) *score.Entity{
 	id := r.Get("id")
-	socre:=g.DB().Model("score").One(id)
-	score.result=strings.Split(r.Get("result").(string),",")
-	g.DB().Model("score").Save(score)
+	data, err := score.Model.One(id)
+	if err != nil || data == nil {
+		return nil
+	}
+	result:=r.Get("result").(string)
+	var totalScore float64
+	for _,v := range strings.Split(result,","){
+		totalScore+=gconv.Float64(v)
+	}
+	data.Result = result
+	data.Score = totalScore
+	g.Dump(score.Model.Save(data))
 	return data
 }
 
