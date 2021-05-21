@@ -43,6 +43,7 @@ func (s *contestantService) Search(r *ghttp.Request) gdb.Result {
 func (s *contestantService) MyContestant(r *ghttp.Request) gdb.Result {
 	// payload := r.Get("JWT_PAYLOAD")
 	userId := r.Get("uid")
+	keyword := r.Get("keyword")
 	m := g.DB().Model("Contestant").Safe().
 		LeftJoin("score", "score.contestant_id=contestant.id").
 		Fields("score.id,name,gid,score")
@@ -54,6 +55,9 @@ func (s *contestantService) MyContestant(r *ghttp.Request) gdb.Result {
 		case "1":
 			m = m.Where("score>0")
 		}
+	}
+	if keyword != nil {
+		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
 	}
 	data, _ := m.
 		Where("score.user_id", userId).

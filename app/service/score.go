@@ -47,7 +47,7 @@ func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 func (s *ScoreService) Show(id int) gdb.Record {
 	data, err := g.DB().Model("Contestant").Safe().
 		LeftJoin("score", "score.contestant_id=contestant.id").
-		Fields("score.id score_id,subject_id,score,gid,name,result").
+		Fields("score.id score_id,subject_id,score,gid,name,result,comments").
 		One("score.id", id)
 	if err != nil {
 		return nil
