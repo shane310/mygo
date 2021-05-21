@@ -18,8 +18,7 @@ type ScoreService struct{}
 // Do score
 func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 	id := r.GetInt("id")
-	g.Dump(id)
-	data, err := score.Model.One(id)
+	data, err := score.Model.One("id",id)
 	if err != nil || data == nil {
 		return nil
 	}
