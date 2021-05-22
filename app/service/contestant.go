@@ -28,12 +28,16 @@ func (s *contestantService) Show(id int) *model.Contestant {
 // contestant show
 func (s *contestantService) Search(r *ghttp.Request) gdb.Result {
 	keyword := r.Get("keyword")
+	matchId := r.Get("match_id")
 	m := g.DB().Model("Contestant").Safe().
 		LeftJoin("score", "score.contestant_id=contestant.id").
 		LeftJoin("subject", "subject.id=score.subject_id").
 		Fields("score.id score_id,contestant.name contestant_name,gid,score,comments,subject.name subject_name")
 	if keyword != nil {
 		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
+	}
+	if matchId != nil {
+		m = m.Where("match_id", matchId)
 	}
 	data, _ := m.All()
 	return data
@@ -43,6 +47,7 @@ func (s *contestantService) Search(r *ghttp.Request) gdb.Result {
 func (s *contestantService) MyContestant(r *ghttp.Request) gdb.Result {
 	// payload := r.Get("JWT_PAYLOAD")
 	userId := r.Get("uid")
+	matchId := r.Get("match_id")
 	keyword := r.Get("keyword")
 	m := g.DB().Model("Contestant").Safe().
 		LeftJoin("score", "score.contestant_id=contestant.id").
@@ -55,6 +60,9 @@ func (s *contestantService) MyContestant(r *ghttp.Request) gdb.Result {
 		case "1":
 			m = m.Where("score>0")
 		}
+	}
+	if matchId != nil {
+		m = m.Where("match_id", matchId)
 	}
 	if keyword != nil {
 		m = m.Where("gid=? or contestant.name=?", keyword, keyword)

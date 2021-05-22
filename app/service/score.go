@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/gogf/gf-demos/app/model/score"
+	"github.com/gogf/gf-demos/app/model/score_log"
 	"github.com/gogf/gf/database/gdb"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
@@ -18,7 +19,7 @@ type ScoreService struct{}
 // Do score
 func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 	id := r.GetInt("id")
-	data, err := score.Model.One("id",id)
+	data, err := score.Model.One("id", id)
 	if err != nil || data == nil {
 		return nil
 	}
@@ -39,6 +40,8 @@ func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 	}
 	data.Id = id
 	score.Model.Save(data)
+	data.Id = 0
+	score_log.Model.Insert(data)
 	return data
 }
 
