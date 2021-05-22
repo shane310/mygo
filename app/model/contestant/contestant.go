@@ -5,3 +5,23 @@
 package contestant
 
 // Fill with you ideas below.
+
+import (
+	"github.com/gogf/gf-demos/app/model/score"
+	"github.com/gogf/gf/os/gtime"
+	"github.com/gogf/gf/util/gmeta"
+)
+
+type ContestantWithScore struct {
+	gmeta.Meta   `orm:"table:contestant"`
+	Id           int           `orm:"id,primary"     json:"id"`             //
+	Gid          int           `orm:"gid"            json:"gid"`            //
+	Name         string        `orm:"name"           json:"name"`           //
+	Region       string        `orm:"region"         json:"region"`         //
+	Group        string        `orm:"group"          json:"group"`          //
+	Province     string        `orm:"province"       json:"province"`       //
+	IsShowResult int           `orm:"is_show_result" json:"is_show_result"` //
+	CreatedAt    *gtime.Time   `orm:"created_at"     json:"created_at"`     //
+	UpdatedAt    *gtime.Time   `orm:"updated_at"     json:"updated_at"`     //
+	UserScore    *score.Entity `orm:"with:contestant_id=id"`
+}

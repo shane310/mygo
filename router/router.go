@@ -32,6 +32,8 @@ func init() {
 		group.Group("/", func(group *ghttp.RouterGroup) {
 			group.Middleware(jwtAuth)
 			group.GET("/contestant/:id", api.Contestant.Show)
+			group.PUT("/contestant/:id", api.Contestant.Edit)
+			group.PUT("/contestant", api.Contestant.BatchEdit)
 			group.GET("/contestant", api.Contestant)
 			group.GET("/subject/:id", api.Subject.Show)
 			group.GET("/subject", api.Subject)

@@ -19,6 +19,8 @@ type ScoreService struct{}
 
 // score list
 // func (s *ScoreService) Index(r *ghttp.Request) gdb.Record {
+// 	contestant.ContestantWithScore.
+// 	ContestantWithScore.
 // 	matchId := r.Get("match_id")
 // 	keyword := r.Get("keyword")
 // 	m := g.DB().Model("Contestant").Safe().

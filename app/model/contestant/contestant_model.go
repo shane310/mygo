@@ -25,23 +25,25 @@ var (
 	Model = &arModel{g.DB("default").Model(Table).Safe()}
 	// Columns defines and stores column names for table contestant.
 	Columns = struct {
-		Id         string //   
-        Gid        string //   
-        Name       string //   
-        Region     string //   
-        Group      string //   
-        Province   string //   
-        CreatedAt  string //   
-        UpdatedAt  string //
+		Id            string //   
+        Gid           string //   
+        Name          string //   
+        Region        string //   
+        Group         string //   
+        Province      string //   
+        IsShowResult  string //   
+        CreatedAt     string //   
+        UpdatedAt     string //
 	}{
-		Id:        "id",          
-        Gid:       "gid",         
-        Name:      "name",        
-        Region:    "region",      
-        Group:     "group",       
-        Province:  "province",    
-        CreatedAt: "created_at",  
-        UpdatedAt: "updated_at",
+		Id:           "id",              
+        Gid:          "gid",             
+        Name:         "name",            
+        Region:       "region",          
+        Group:        "group",           
+        Province:     "province",        
+        IsShowResult: "is_show_result",  
+        CreatedAt:    "created_at",      
+        UpdatedAt:    "updated_at",
 	}
 )
 

@@ -3,9 +3,11 @@ package service
 import (
 	"github.com/gogf/gf-demos/app/dao"
 	"github.com/gogf/gf-demos/app/model"
+	"github.com/gogf/gf-demos/app/model/contestant"
 	"github.com/gogf/gf/database/gdb"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/util/gconv"
 )
 
 // 中间件管理服务
@@ -23,6 +25,37 @@ func (s *contestantService) Index(r *ghttp.Request) []*model.Contestant {
 func (s *contestantService) Show(id int) *model.Contestant {
 	data, _ := dao.Contestant.FindOne(id)
 	return data
+}
+
+// contestant edit
+func (s *contestantService) Edit(id int, r *ghttp.Request) map[string]interface{} {
+	params := r.GetQueryMap()
+	data, _ := contestant.Model.WherePri(id).FindOne()
+	if data == nil {
+		return nil
+	}
+	newData := gconv.Map(data)
+	if params != nil {
+		for k, v := range params {
+			newData[k] = v
+		}
+	}
+	contestant.Model.Save(newData)
+	return newData
+}
+
+// contestant batch edit
+func (s *contestantService) BatchEdit(r *ghttp.Request) map[string]interface{} {
+	params := r.GetQueryMap()
+	ids := r.Get("ids")
+	newData := make(map[string]interface{})
+	if params != nil {
+		for k, v := range params {
+			newData[k] = v
+		}
+	}
+	contestant.Model.Where("id in (" + ids.(string) + ")").Update(newData)
+	return newData
 }
 
 // contestant show

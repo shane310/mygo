@@ -12,14 +12,15 @@ import (
 
 // Entity is the golang structure for table contestant.
 type Entity struct {
-    Id        int         `orm:"id,primary" json:"id"`         //   
-    Gid       int         `orm:"gid"        json:"gid"`        //   
-    Name      string      `orm:"name"       json:"name"`       //   
-    Region    string      `orm:"region"     json:"region"`     //   
-    Group     string      `orm:"group"      json:"group"`      //   
-    Province  string      `orm:"province"   json:"province"`   //   
-    CreatedAt *gtime.Time `orm:"created_at" json:"created_at"` //   
-    UpdatedAt *gtime.Time `orm:"updated_at" json:"updated_at"` //   
+    Id           int         `orm:"id,primary"     json:"id"`             //   
+    Gid          int         `orm:"gid"            json:"gid"`            //   
+    Name         string      `orm:"name"           json:"name"`           //   
+    Region       string      `orm:"region"         json:"region"`         //   
+    Group        string      `orm:"group"          json:"group"`          //   
+    Province     string      `orm:"province"       json:"province"`       //   
+    IsShowResult int         `orm:"is_show_result" json:"is_show_result"` //   
+    CreatedAt    *gtime.Time `orm:"created_at"     json:"created_at"`     //   
+    UpdatedAt    *gtime.Time `orm:"updated_at"     json:"updated_at"`     //   
 }
 
 // OmitEmpty sets OPTION_OMITEMPTY option for the model, which automatically filers
