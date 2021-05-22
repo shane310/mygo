@@ -24,7 +24,7 @@ func (s *ScoreService) Index(r *ghttp.Request) gdb.Result {
 	m := g.DB().Model("Contestant").Safe().
 		LeftJoin("score", "score.contestant_id=contestant.id").
 		LeftJoin("subject", "subject.id=score.subject_id").
-		Fields("score.id score_id,subject_id,score,gid,contestant.name contestant_name,subject.name subject_name").
+		Fields("contestant.*,score.id score_id,subject_id,score,subject.name subject_name").
 		Where("score.match_id", matchId)
 	if keyword != nil {
 		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
@@ -37,22 +37,18 @@ func (s *ScoreService) Index(r *ghttp.Request) gdb.Result {
 }
 
 // score list
-// func (s *ScoreService) LogList(r *ghttp.Request) gdb.Result {
-// 	scoreId := r.Get("score_id")
-// 	m := g.DB().Model("Contestant").Safe().
-// 		LeftJoin("score", "score.contestant_id=contestant.id").
-// 		LeftJoin("subject", "subject.id=score.subject_id").
-// 		Fields("score.id score_id,subject_id,score,gid,contestant.name contestant_name,subject.name subject_name").
-// 		Where("score.match_id", matchId)
-// 	if keyword != nil {
-// 		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
-// 	}
-// 	data, err := m.All()
-// 	if err != nil {
-// 		return nil
-// 	}
-// 	return data
-// }
+func (s *ScoreService) LogList(r *ghttp.Request) gdb.Result {
+	scoreId := r.Get("score_id")
+	m := g.DB().Model("score_log").Safe().
+		LeftJoin("user", "user.id=score_log.user_id").
+		Fields("score_log.*,name").
+		Where("score_id", scoreId)
+	data, err := m.All()
+	if err != nil {
+		return nil
+	}
+	return data
+}
 
 // Do score
 func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
