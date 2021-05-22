@@ -18,15 +18,32 @@ var Score = ScoreService{}
 type ScoreService struct{}
 
 // score list
-// func (s *ScoreService) Index(r *ghttp.Request) gdb.Record {
-// 	contestant.ContestantWithScore.
-// 	ContestantWithScore.
-// 	matchId := r.Get("match_id")
-// 	keyword := r.Get("keyword")
+func (s *ScoreService) Index(r *ghttp.Request) gdb.Result {
+	matchId := r.Get("match_id")
+	keyword := r.Get("keyword")
+	m := g.DB().Model("Contestant").Safe().
+		LeftJoin("score", "score.contestant_id=contestant.id").
+		LeftJoin("subject", "subject.id=score.subject_id").
+		Fields("score.id score_id,subject_id,score,gid,contestant.name contestant_name,subject.name subject_name").
+		Where("score.match_id", matchId)
+	if keyword != nil {
+		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
+	}
+	data, err := m.All()
+	if err != nil {
+		return nil
+	}
+	return data
+}
+
+// score list
+// func (s *ScoreService) LogList(r *ghttp.Request) gdb.Result {
+// 	scoreId := r.Get("score_id")
 // 	m := g.DB().Model("Contestant").Safe().
 // 		LeftJoin("score", "score.contestant_id=contestant.id").
-// 		Fields("score.id score_id,subject_id,score,gid,name,result,comments").
-// 		Where("match_id", matchId)
+// 		LeftJoin("subject", "subject.id=score.subject_id").
+// 		Fields("score.id score_id,subject_id,score,gid,contestant.name contestant_name,subject.name subject_name").
+// 		Where("score.match_id", matchId)
 // 	if keyword != nil {
 // 		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
 // 	}

@@ -7,21 +7,41 @@ package contestant
 // Fill with you ideas below.
 
 import (
-	"github.com/gogf/gf-demos/app/model/score"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/util/gmeta"
 )
 
-type ContestantWithScore struct {
+type EntityUserScores struct {
+	gmeta.Meta   `orm:"table:score"`
+	Id           int         `orm:"id,primary"    json:"id"`            //
+	ContestantId int         `orm:"contestant_id" json:"contestant_id"` //
+	MatchId      int         `orm:"match_id"      json:"match_id"`      //
+	SubjectId    int         `orm:"subject_id"    json:"subject_id"`    //
+	UserId       int         `orm:"user_id"       json:"user_id"`       //
+	Vurl         string      `orm:"vurl"          json:"vurl"`          //
+	Result       string      `orm:"result"        json:"result"`        //
+	Score        float64     `orm:"score"         json:"score"`         //
+	Comments     string      `orm:"comments"      json:"comments"`      //
+	CreatedAt    *gtime.Time `orm:"created_at"    json:"created_at"`    //
+	UpdatedAt    *gtime.Time `orm:"updated_at"    json:"updated_at"`    //
+}
+
+type EntityContestant struct {
 	gmeta.Meta   `orm:"table:contestant"`
-	Id           int           `orm:"id,primary"     json:"id"`             //
-	Gid          int           `orm:"gid"            json:"gid"`            //
-	Name         string        `orm:"name"           json:"name"`           //
-	Region       string        `orm:"region"         json:"region"`         //
-	Group        string        `orm:"group"          json:"group"`          //
-	Province     string        `orm:"province"       json:"province"`       //
-	IsShowResult int           `orm:"is_show_result" json:"is_show_result"` //
-	CreatedAt    *gtime.Time   `orm:"created_at"     json:"created_at"`     //
-	UpdatedAt    *gtime.Time   `orm:"updated_at"     json:"updated_at"`     //
-	UserScore    *score.Entity `orm:"with:contestant_id=id"`
+	Id           int               `orm:"id,primary"     json:"id"`             //
+	Gid          int               `orm:"gid"            json:"gid"`            //
+	Name         string            `orm:"name"           json:"name"`           //
+	Region       string            `orm:"region"         json:"region"`         //
+	Group        string            `orm:"group"          json:"group"`          //
+	Province     string            `orm:"province"       json:"province"`       //
+	IsShowResult int               `orm:"is_show_result" json:"is_show_result"` //
+	CreatedAt    *gtime.Time       `orm:"created_at"     json:"created_at"`     //
+	UpdatedAt    *gtime.Time       `orm:"updated_at"     json:"updated_at"`     //
+	UserScore    *EntityUserScores `orm:"with:contestant_id=id"`
+}
+
+// 组合模型，用户信息
+type ContestantWithScore struct {
+	Contestant *EntityContestant
+	UserScores *EntityUserScores
 }
