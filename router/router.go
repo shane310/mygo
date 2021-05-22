@@ -31,6 +31,8 @@ func init() {
 	})
 	s.Group("/api/", func(group *ghttp.RouterGroup) {
 		group.Middleware(service.Middleware.CORS, jwtAuth)
+		group.GET("/match/:id", api.Match.Show)
+		group.GET("/match", api.Match)
 		group.GET("/contestant/:id", api.Contestant.Show)
 		group.GET("/contestant", api.Contestant)
 		group.GET("/subject/:id", api.Subject.Show)
