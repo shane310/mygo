@@ -12,6 +12,16 @@ var Score = new(scoreApi)
 
 type scoreApi struct{}
 
+// @summary 获取评分列表
+// @tags    Score
+// @produce json
+// @router  /score [GET]
+// @success 200 {object} response.JsonResponse "执行结果"
+func (a *scoreApi) Index(r *ghttp.Request) {
+	data := service.Score.Index(r)
+	response.JsonExit(r, 0, "ok", data)
+}
+
 // @summary 获取评分详情
 // @tags    Score
 // @produce json
