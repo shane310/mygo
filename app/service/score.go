@@ -1,6 +1,7 @@
 package service
 
 import (
+	"encoding/json"
 	"strings"
 
 	"github.com/gogf/gf-demos/app/model/score"
@@ -39,9 +40,14 @@ func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 		data.Comments = r.Get("comments").(string)
 	}
 	data.Id = id
+	// Insert score log
 	score.Model.Save(data)
-	data.Id = 0
-	score_log.Model.Insert(data)
+	dataJson, _ := json.Marshal(data)
+	log := gconv.Map(dataJson)
+	log["score_id"] = log["id"]
+	delete(log, "id")
+	score_log.Model.Insert(log)
+	g.Dump(log)
 	return data
 }
 
