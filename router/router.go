@@ -22,7 +22,7 @@ func init() {
 		group.ALL("/refresh_token", api.Auth.RefreshHandler)
 		group.ALL("/logout", api.Auth.LogoutHandler)
 	})
-	s.Group("/", func(group *ghttp.RouterGroup) {
+	s.Group("/api/", func(group *ghttp.RouterGroup) {
 		group.Middleware(
 			service.Middleware.Ctx,
 			service.Middleware.CORS,

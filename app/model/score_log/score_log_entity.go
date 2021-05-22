@@ -12,17 +12,17 @@ import (
 
 // Entity is the golang structure for table score_log.
 type Entity struct {
-	ScoreId      int         `orm:"score_id"    json:"score_id"`        //
-	ContestantId int         `orm:"contestant_id" json:"contestant_id"` //
-	MatchId      int         `orm:"match_id"      json:"match_id"`      //
-	SubjectId    int         `orm:"subject_id"    json:"subject_id"`    //
-	UserId       int         `orm:"user_id"       json:"user_id"`       //
-	Vurl         string      `orm:"vurl"          json:"vurl"`          //
-	Result       string      `orm:"result"        json:"result"`        //
-	Score        float64     `orm:"score"         json:"score"`         //
-	Comments     string      `orm:"comments"      json:"comments"`      //
-	CreatedAt    *gtime.Time `orm:"created_at"    json:"created_at"`    //
-	UpdatedAt    *gtime.Time `orm:"updated_at"    json:"updated_at"`    //
+    ScoreId      int         `orm:"score_id"      json:"score_id"`      //   
+    ContestantId int         `orm:"contestant_id" json:"contestant_id"` //   
+    MatchId      int         `orm:"match_id"      json:"match_id"`      //   
+    SubjectId    int         `orm:"subject_id"    json:"subject_id"`    //   
+    UserId       int         `orm:"user_id"       json:"user_id"`       //   
+    Vurl         string      `orm:"vurl"          json:"vurl"`          //   
+    Result       string      `orm:"result"        json:"result"`        //   
+    Score        float64     `orm:"score"         json:"score"`         //   
+    Comments     string      `orm:"comments"      json:"comments"`      //   
+    CreatedAt    *gtime.Time `orm:"created_at"    json:"created_at"`    //   
+    UpdatedAt    *gtime.Time `orm:"updated_at"    json:"updated_at"`    //   
 }
 
 // OmitEmpty sets OPTION_OMITEMPTY option for the model, which automatically filers

@@ -17,6 +17,24 @@ var Score = ScoreService{}
 
 type ScoreService struct{}
 
+// score list
+// func (s *ScoreService) Index(r *ghttp.Request) gdb.Record {
+// 	matchId := r.Get("match_id")
+// 	keyword := r.Get("keyword")
+// 	m := g.DB().Model("Contestant").Safe().
+// 		LeftJoin("score", "score.contestant_id=contestant.id").
+// 		Fields("score.id score_id,subject_id,score,gid,name,result,comments").
+// 		Where("match_id", matchId)
+// 	if keyword != nil {
+// 		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
+// 	}
+// 	data, err := m.All()
+// 	if err != nil {
+// 		return nil
+// 	}
+// 	return data
+// }
+
 // Do score
 func (s *ScoreService) Do(r *ghttp.Request) *score.Entity {
 	id := r.GetInt("id")
