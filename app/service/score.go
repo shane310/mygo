@@ -99,3 +99,33 @@ func (s *ScoreService) Show(id int) gdb.Record {
 	}
 	return data
 }
+
+// score export
+func (s *ScoreService) ExportScore(r *ghttp.Request) gdb.Result {
+	m := g.DB().Model("Contestant").As("t1").Safe().
+		LeftJoin("score t2", "t2.contestant_id=t1.id and t2.subject_id=1").
+		LeftJoin("score t3", "t3.contestant_id=t1.id and t3.subject_id=2").
+		LeftJoin("user t4", "t4.id=t2.user_id").
+		LeftJoin("user t5", "t5.id=t3.user_id").
+		Fields("t1.gid cgid,t1.name cname,region,`group`,t2.score,t4.gid ugid1,t4.name uname1,t3.score score2,t5.gid ugid2,t5.name uname2,case is_show_result when 1 then '是' else '否' end  is_show_result")
+	data, err := m.All()
+	if err != nil {
+		return nil
+	}
+	return data
+}
+
+// score export log
+func (s *ScoreService) ExportScoreLog(r *ghttp.Request) gdb.Result {
+	matchId := r.Get("match_id")
+	m := g.DB().Model("Contestant").As("t1").Safe().
+		LeftJoin("score_log t2", "t2.contestant_id=t1.id").
+		LeftJoin("subject t3", "t3.id=t2.subject_id").
+		Fields("gid,t1.name,t1.group,t3.name sname,score,t2.created_at").
+		Where("t2.match_id", matchId).Where("t2.contestant_id is not null")
+	data, err := m.All()
+	if err != nil {
+		return nil
+	}
+	return data
+}

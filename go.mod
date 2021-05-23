@@ -3,6 +3,8 @@ module github.com/gogf/gf-demos
 go 1.11
 
 require (
+	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
+	github.com/360EntSecGroup-Skylar/excelize/v2 v2.4.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/go-openapi/spec v0.20.3 // indirect
 	github.com/go-openapi/swag v0.19.15 // indirect
