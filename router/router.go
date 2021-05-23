@@ -31,7 +31,7 @@ func init() {
 		// group.GET("/score/export", api.Score.Export)
 		// Need auth
 		group.Group("/", func(group *ghttp.RouterGroup) {
-			group.Middleware(jwtAuth)
+			// group.Middleware(jwtAuth)
 			group.GET("/contestant/:id", api.Contestant.Show)
 			group.PUT("/contestant/:id", api.Contestant.Edit)
 			group.PUT("/contestant", api.Contestant.BatchEdit)
