@@ -21,6 +21,7 @@ type ScoreService struct{}
 func (s *ScoreService) Index(r *ghttp.Request) gdb.Result {
 	matchId := r.Get("match_id")
 	keyword := r.Get("keyword")
+	sort := r.Get("sort")
 	m := g.DB().Model("Contestant").Safe().
 		LeftJoin("score", "score.contestant_id=contestant.id").
 		LeftJoin("subject", "subject.id=score.subject_id").
@@ -28,6 +29,9 @@ func (s *ScoreService) Index(r *ghttp.Request) gdb.Result {
 		Where("score.match_id", matchId)
 	if keyword != nil {
 		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
+	}
+	if sort != nil {
+		m = m.OrderBy(sort.(string))
 	}
 	data, err := m.All()
 	if err != nil {

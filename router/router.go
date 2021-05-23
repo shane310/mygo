@@ -27,7 +27,7 @@ func init() {
 		group.ALL("/user", api.User)
 		group.GET("/match/:id", api.Match.Show)
 		group.GET("/match", api.Match)
-		group.GET("/contestant/search", api.Contestant.Search)
+		group.GET("/contestant-search", api.Contestant.Search)
 		// Need auth
 		group.Group("/", func(group *ghttp.RouterGroup) {
 			group.Middleware(jwtAuth)
