@@ -31,7 +31,7 @@ func (s *ScoreService) Index(r *ghttp.Request) gdb.Result {
 		m = m.Where("gid=? or contestant.name=?", keyword, keyword)
 	}
 	if sort != nil {
-		m = m.OrderBy(sort.(string))
+		m = m.OrderBy(strings.Replace(sort.(string), ",", " ", 1))
 	}
 	data, err := m.All()
 	if err != nil {
