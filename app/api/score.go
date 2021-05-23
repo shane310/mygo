@@ -128,6 +128,7 @@ func (a *scoreApi) Export(r *ghttp.Request) {
 		f.SetCellValue("Sheet2", "E"+index, v["score"])
 		f.SetCellValue("Sheet2", "F"+index, v["created_at"])
 	}
+	r.Response.Writer.Header().Set("Content-Type", "application/octet-stream")
 	r.Response.Writer.Header().Set("Content-Disposition", "attachment; filename=score-export.xlsx")
 	options := ghttp.CORSOptions{
 		AllowOrigin:      "*",
