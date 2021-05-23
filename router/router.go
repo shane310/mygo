@@ -28,7 +28,7 @@ func init() {
 		group.GET("/match/:id", api.Match.Show)
 		group.GET("/match", api.Match)
 		group.GET("/contestant-search", api.Contestant.Search)
-		group.GET("/score/export", api.Score.Export)
+		// group.GET("/score/export", api.Score.Export)
 		// Need auth
 		group.Group("/", func(group *ghttp.RouterGroup) {
 			group.Middleware(jwtAuth)
@@ -40,7 +40,7 @@ func init() {
 			group.GET("/subject", api.Subject)
 			group.PUT("/score/:id", api.Score.Do)
 			group.GET("/score/:id", api.Score.Show)
-			// group.GET("/score", api.Score)
+			group.GET("/score", api.Score)
 		})
 
 	})

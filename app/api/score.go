@@ -128,6 +128,6 @@ func (a *scoreApi) Export(r *ghttp.Request) {
 		f.SetCellValue("Sheet2", "E"+index, v["score"])
 		f.SetCellValue("Sheet2", "F"+index, v["created_at"])
 	}
-	r.Response.Writer.Header().Set("Content-Disposition", "attachment; filename=score-export.xls")
+	r.Response.Writer.Header().Set("Content-Disposition", "attachment; filename=score-export.xlsx")
 	f.Write(r.Response.Writer)
 }
