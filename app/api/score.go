@@ -129,5 +129,13 @@ func (a *scoreApi) Export(r *ghttp.Request) {
 		f.SetCellValue("Sheet2", "F"+index, v["created_at"])
 	}
 	r.Response.Writer.Header().Set("Content-Disposition", "attachment; filename=score-export.xlsx")
+	options := ghttp.CORSOptions{
+		AllowOrigin:      "*",
+		AllowMethods:     "*",
+		AllowCredentials: "true",
+		AllowHeaders:     "*",
+		MaxAge:           3628800,
+	}
+	r.Response.CORS(options)
 	f.Write(r.Response.Writer)
 }

@@ -42,6 +42,5 @@ func init() {
 			group.GET("/score/:id", api.Score.Show)
 			group.GET("/score", api.Score)
 		})
-
 	})
 }
